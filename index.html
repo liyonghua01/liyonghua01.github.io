@@ -5,39 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>李咏华 | TikTok电商专家 & AI视觉生成</title>
     <link rel="stylesheet" href="style.css">
+    <!-- 加载 Three.js 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-    <div class="homepage">
+    <div class="site-wrapper">
         
-        <!-- 人物 Hero Section (核心区域) -->
-        <div class="face-wrapper">
-            <!-- 底图：面部和身体（眼白部分导出的JPG图） -->
-            <img src="face-base.jpg" alt="底图" class="face-base">
-            
-            <!-- 中间层：覆盖层（包括眼眶和眼镜） -->
-            <div class="eye-mask-container">
-                <img src="face-mask.png" alt="遮罩" class="face-mask">
-                
-                <!-- 核心：两个眼球 -->
-                <div id="eyes-container">
-                    <div id="eye-l" class="eye">
-                        <img src="eye-pupil.png" alt="左眼瞳孔" class="pupil">
-                    </div>
-                    <div id="eye-r" class="eye">
-                        <img src="eye-pupil.png" alt="右眼瞳孔" class="pupil">
-                    </div>
+        <!-- 顶部 Header (复制目标文本) -->
+        <header class="site-header">
+            <div class="header-left">
+                <span class="user-name">李咏华</span>
+                <span class="user-title">TikTok电商专家 & AI视觉生成</span>
+            </div>
+            <div class="device-switcher">
+                <span class="device-item active">电脑</span>
+                <span class="device-item">平板</span>
+                <span class="device-item">手机</span>
+            </div>
+            <div class="header-right">
+                <span class="copyright">© 2026 新手引导</span>
+                <span class="portfolio-text">PORTFOLIO : 2026</span>
+            </div>
+        </header>
+
+        <!-- 中央 Main 内容 (左右布局) -->
+        <main class="main-content">
+            <div class="content-left">
+                <!-- 真正的 3D 视口，Canvas 用于渲染 Three.js 模型 -->
+                <canvas id="3d-avatar-canvas"></canvas>
+            </div>
+            <div class="content-right">
+                <h1 class="about-title">李咏华简历 | About Me</h1>
+                <p class="about-intro">
+                    专注TikTok电商运营 & AI视觉生成 | 操盘 TikTok 0-1 冷启动策略与 ComfyUI 节点式工作流
+                </p>
+                <div class="social-icons">
+                    <span class="icon-f">f</span>
+                    <span class="icon-mail"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 4.2V18h16V8.2l-8 5-8-5zm8 3L4 6h16l-8 5.2z"/></svg></span>
+                    <span class="icon-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.26 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.63 21 3 13.37 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+                </div>
+                <div class="scroll-down">
+                    <span class="scroll-icon">↓</span>
+                    <span class="scroll-text">SCROLL DOWN</span>
                 </div>
             </div>
-        </div>
+        </main>
 
-        <!-- 简历介绍 Section (全屏后，文本放在下方更整洁) -->
-        <div class="intro-section">
-            <h1>欢迎来到我的互动主页</h1>
-            <p>尝试移动鼠标，看看我的眼神。</p>
-            <p><strong>李咏华</strong> | 专注TikTok电商运营 & AI视觉生成 | 操盘 TikTok 0-1 冷启动策略与 ComfyUI 节点式工作流</p>
-            <button class="learn-more">了解更多我的项目案例</button>
-        </div>
+        <!-- 底部 Footer (复制目标文本) -->
+        <footer class="site-footer">
+            <div class="footer-left">
+                <span class="footer-item">TikTok操盘 • ComfyUI节点 • 业务策略</span>
+            </div>
+            <div class="footer-right">
+                <span class="location-text">业务洽谈 • 寻求合作</span>
+            </div>
+        </footer.site-footer>
 
     </div>
 
