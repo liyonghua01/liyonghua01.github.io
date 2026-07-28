@@ -1,39 +1,145 @@
-const pupils = document.querySelectorAll('.pupil');
+/* 全局样式和米色背景 */
+* {
+    margin: 0;
+    padding: 0;
+    box-spacing: border-box;
+}
 
-document.addEventListener('mousemove', (e) => {
-    // 获取鼠标在页面上的实时坐标
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
+body {
+    background-color: #f7e6cf; /* 复制目标图像的米色背景 */
+    color: #000;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow: hidden; /* 防止出现滚动条 */
+    height: 100vh;
+    width: 100vw;
+}
 
-    pupils.forEach(pupil => {
-        // 获取每一只眼球容器的位置信息
-        const eye = pupil.parentElement;
-        const rect = eye.getBoundingClientRect();
-        
-        // 计算眼球中心位置的页面坐标
-        const eyeCenterX = rect.left + rect.width / 2;
-        const eyeCenterY = rect.top + rect.height / 2;
+/* 全屏布局容器 */
+.site-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    padding: 20px;
+}
 
-        // 计算鼠标相对于眼球中心的偏移量
-        const dx = mouseX - eyeCenterX;
-        const dy = mouseY - eyeCenterY;
+/* Header 顶部栏样式 */
+.site-header, .site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    padding: 10px 0;
+    text-transform: uppercase;
+}
 
-        // 计算角度 (使用 atan2 获取弧度)
-        const angle = Math.atan2(dy, dx);
-        
-        // 计算瞳孔移动的最大距离，防止跑出眼眶范围
-        // 设置为一个较大的范围，例如眼眶宽度的四分之一
-        const maxDistance = Math.min(rect.width / 4, rect.height / 4); 
-        
-        // 计算实际的偏移距离，通过除以一个数值（例如 10）来降低敏感度，让移动更自然
-        const distance = Math.min(Math.sqrt(dx * dx + dy * dy) / 10, maxDistance); 
+.user-name { font-weight: bold; margin-right: 10px; }
+.user-title { color: #555; }
 
-        // 将角度和限制后的距离转换为新的 X 和 Y 轴偏移
-        const translateX = Math.cos(angle) * distance;
-        const translateY = Math.sin(angle) * distance;
+.device-switcher {
+    display: flex;
+    gap: 15px;
+    background-color: #d1b89c; /* 米色背景下的暗色块 */
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+.device-item { cursor: pointer; color: #555; }
+.device-item.active { color: #000; font-weight: bold; }
 
-        // 应用 CSS transform 来更新瞳孔位置
-        // calc确保初始保持居中(-50%)，然后加上新的偏移量
-        pupil.style.transform = `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px))`;
-    });
-});
+.header-right { text-align: right; }
+.copyright { margin-right: 10px; }
+
+/* Main 中央内容样式 (左右布局) */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin: 40px 0;
+}
+
+.content-left {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Canvas 占据左侧的大部分空间并居中 */
+#3d-avatar-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.content-right {
+    width: 400px; /* 固定右侧文本宽度 */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-left: 40px;
+}
+
+.about-title {
+    font-size: 72px; /* 巨大的 About Me 标题 */
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+.about-intro {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* 社交图标样式 */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.social-icons span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+.social-icons svg {
+    width: 20px;
+    height: 20px;
+    fill: #000;
+}
+
+/* 滚动提示样式 */
+.scroll-down {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555;
+    font-size: 12px;
+    cursor: pointer;
+}
+.scroll-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 24px;
+    border: 1px solid #555;
+    border-radius: 8px;
+}
+
+/* Footer 底部栏样式 */
+.footer-right { text-align: right; }
+.footer-item { color: #555; }
+.location-text { font-weight: bold; }
