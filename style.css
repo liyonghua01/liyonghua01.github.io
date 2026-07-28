@@ -1,55 +1,65 @@
-/* 全屏容器 */
-#homepage {
-    height: 100vh;
+/* 全局样式 */
+body {
+    margin: 0;
+    height: 100vh; /* 必须有 min-height，让 body 自身填满视口 */
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0; /* 与原图背景接近的底色 */
-    overflow: hidden; /* 防止出现滚动条 */
+    background-color: #efece8; /* 原图的背景色 */
+    font-family: sans-serif;
+    overflow: hidden; /* 防止出现滚动条影响坐标计算 */
 }
 
+.homepage {
+    display: flex;
+    flex-direction: column; /* 上下排列结构 */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- 人物 Hero 区域（全屏的主要区域） --- */
 .face-wrapper {
     position: relative;
-    /* 关键：使用视口单位让它全屏覆盖 */
-    width: 100vw; 
-    height: 100vh;
+    /* 关键：使用视口单位让它更宽大 */
+    width: 90%; 
+    max-width: 1000px; /* 限制最大宽度，防止超宽屏下太大 */
+    height: 65vh; /* 使人物区域更大 */
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 5vh;
 }
 
 .face-base {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 关键：图片占满屏幕并保持比例，裁剪多余部分 */
+    object-fit: contain; /* 关键：图片占满屏幕并保持比例，裁剪多余部分 */
+    display: block;
     z-index: 1; /* 底层 */
 }
 
 .eye-mask-container {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
     z-index: 3; /* 眼镜和蒙版在最上面 */
-    pointer-events: none; /* 让鼠标事件穿透遮罩，防止阻挡眼球交互 */
+    pointer-events: none; /* 让鼠标穿透遮罩 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .face-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 遮罩层也要全屏占满并对齐底图 */
+    object-fit: contain; /* 遮罩也要占满屏幕并对齐底图 */
+    display: block;
 }
-
-/* ★★★ 这里是需要根据你的素材精确测量定位的地方 ★★★ */
-/* 这个位置是基于全屏状态下的对齐。如果你的素材尺寸或裁剪不同，需要微调这些百分比。 */
 
 #eyes-container {
     position: absolute;
@@ -60,37 +70,68 @@
     z-index: 2; /* 夹在底图和遮罩中间 */
 }
 
+/* ★★★ 这里是解决眼神位置偏差的关键地方 ★★★ */
+/* 重新估算坐标并在全屏布局下定位 */
 .eye {
     position: absolute;
     /* 需要根据 face-wrapper 的大小和原图精准测量。这里提供一个估算值。 */
-    top: 38.5%; /* 估算的左眼垂直位置 */
-    left: 36.5%; /* 估算的左眼水平位置 */
-    width: 12%; /* 眼球相对于包裹器的宽度 */
-    height: 11%; /* 眼球相对于包裹器的高度 */
+    top: 38%; /* 垂直位置：从上往下38%处（左眼和右眼在同一直线） */
+    width: 12%; /* 眼球相对于包裹器的宽度百分比 */
+    height: 11%; /* 眼球相对于包裹器的高度百分比 */
     overflow: hidden; /* 关键：瞳孔溢出隐藏 */
+}
+
+#eye-l {
+    left: 36.5%; /* 估算的左眼水平位置 */
 }
 
 #eye-r {
     left: 51.5%; /* 估算的右眼水平位置 */
 }
 
+/* 瞳孔，居中，跟随鼠标移动 */
 .pupil {
     position: absolute;
     width: 40%; /* 瞳孔相对于眼球的比例 */
     height: 40%;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* 初始状态：居中 */
+    transform: translate(-50%, -50%); /* 初始居中 */
     transition: transform 0.05s linear; /* 添加平滑移动效果 */
 }
 
-/* (可选) 文字介绍样式 */
-.intro {
+/* --- 文本和按钮区域 --- */
+.intro-section {
     position: relative;
     z-index: 4; /* 文字在最上层 */
-    top: 35%; /* 放在人物下面 */
+    width: 90%;
+    max-width: 600px; /* 文本不需要全屏 */
     text-align: center;
     color: #333;
+    padding: 20px;
+    margin-top: 5vh;
 }
-.intro h1 { font-size: 2.5em; margin-bottom: 10px; }
-.intro p { font-size: 1.2em; }
+
+.intro-section h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.intro-section p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.learn-more {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.learn-more:hover {
+    background-color: #555;
+}
