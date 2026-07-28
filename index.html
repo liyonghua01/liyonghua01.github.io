@@ -2,29 +2,40 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>我的互动主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的互动全屏主页</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div id="homepage">
         <div class="face-wrapper">
-            <!-- 1. 底层：你刚刚发的那张眼白底图 -->
+            <!-- 1. 最底层：面部和身体底图 -->
             <img src="face-base.jpg" alt="底图" class="face-base">
             
-            <!-- 2. 中间层：两个眼球 -->
-            <div id="eyes-container">
-                <div id="eye-l" class="eye">
-                    <img src="eye-pupil.png" alt="左眼瞳孔" class="pupil">
-                </div>
-                <div id="eye-r" class="eye">
-                    <img src="eye-pupil.png" alt="右眼瞳孔" class="pupil">
+            <!-- 2. 中间层：覆盖层（包括眼眶和眼镜） -->
+            <div class="eye-mask-container">
+                <img src="face-mask.png" alt="遮罩" class="face-mask">
+                
+                <!-- 3. 核心：两个眼球 -->
+                <div id="eyes-container">
+                    <div id="eye-l" class="eye">
+                        <img src="eye-pupil.png" alt="左瞳孔" class="pupil">
+                    </div>
+                    <div id="eye-r" class="eye">
+                        <img src="eye-pupil.png" alt="右瞳孔" class="pupil">
+                    </div>
                 </div>
             </div>
-
-            <!-- 3. 顶层：眼镜和眼眶遮罩 -->
-            <img src="face-mask.png" alt="遮罩" class="face-mask">
+            
+            <!-- 4. 文字介绍 (可选) -->
+            <div class="intro">
+                <h1>欢迎来到我的互动首页</h1>
+                <p>尝试移动鼠标，看看我的眼神。</p>
+            </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
