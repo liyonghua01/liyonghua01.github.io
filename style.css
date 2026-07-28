@@ -1,137 +1,145 @@
-/* 全局样式 */
-body {
+/* 全局样式和米色背景 */
+* {
     margin: 0;
-    height: 100vh; /* 必须有 min-height，让 body 自身填满视口 */
+    padding: 0;
+    box-spacing: border-box;
+}
+
+body {
+    background-color: #f7e6cf; /* 复制目标图像的米色背景 */
+    color: #000;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow: hidden; /* 防止出现滚动条 */
+    height: 100vh;
     width: 100vw;
+}
+
+/* 全屏布局容器 */
+.site-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #efece8; /* 原图的背景色 */
-    font-family: sans-serif;
-    overflow: hidden; /* 防止出现滚动条影响坐标计算 */
-}
-
-.homepage {
-    display: flex;
-    flex-direction: column; /* 上下排列结构 */
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-/* --- 人物 Hero 区域（全屏的主要区域） --- */
-.face-wrapper {
-    position: relative;
-    /* 关键：使用视口单位让它更宽大 */
-    width: 90%; 
-    max-width: 1000px; /* 限制最大宽度，防止超宽屏下太大 */
-    height: 65vh; /* 使人物区域更大 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5vh;
-}
-
-.face-base {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* 关键：图片占满屏幕并保持比例，裁剪多余部分 */
-    display: block;
-    z-index: 1; /* 底层 */
-}
-
-.eye-mask-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 3; /* 眼镜和蒙版在最上面 */
-    pointer-events: none; /* 让鼠标穿透遮罩 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.face-mask {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* 遮罩也要占满屏幕并对齐底图 */
-    display: block;
-}
-
-#eyes-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 2; /* 夹在底图和遮罩中间 */
-}
-
-/* ★★★ 这里是解决眼神位置偏差的关键地方 ★★★ */
-/* 重新估算坐标并在全屏布局下定位 */
-.eye {
-    position: absolute;
-    /* 需要根据 face-wrapper 的大小和原图精准测量。这里提供一个估算值。 */
-    top: 38%; /* 垂直位置：从上往下38%处（左眼和右眼在同一直线） */
-    width: 12%; /* 眼球相对于包裹器的宽度百分比 */
-    height: 11%; /* 眼球相对于包裹器的高度百分比 */
-    overflow: hidden; /* 关键：瞳孔溢出隐藏 */
-}
-
-#eye-l {
-    left: 36.5%; /* 估算的左眼水平位置 */
-}
-
-#eye-r {
-    left: 51.5%; /* 估算的右眼水平位置 */
-}
-
-/* 瞳孔，居中，跟随鼠标移动 */
-.pupil {
-    position: absolute;
-    width: 40%; /* 瞳孔相对于眼球的比例 */
-    height: 40%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* 初始居中 */
-    transition: transform 0.05s linear; /* 添加平滑移动效果 */
-}
-
-/* --- 文本和按钮区域 --- */
-.intro-section {
-    position: relative;
-    z-index: 4; /* 文字在最上层 */
-    width: 90%;
-    max-width: 600px; /* 文本不需要全屏 */
-    text-align: center;
-    color: #333;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
     padding: 20px;
-    margin-top: 5vh;
 }
 
-.intro-section h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
+/* Header 顶部栏样式 */
+.site-header, .site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    padding: 10px 0;
+    text-transform: uppercase;
 }
 
-.intro-section p {
-    font-size: 1.1em;
-    margin-bottom: 20px;
+.user-name { font-weight: bold; margin-right: 10px; }
+.user-title { color: #555; }
+
+.device-switcher {
+    display: flex;
+    gap: 15px;
+    background-color: #d1b89c; /* 米色背景下的暗色块 */
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+.device-item { cursor: pointer; color: #555; }
+.device-item.active { color: #000; font-weight: bold; }
+
+.header-right { text-align: right; }
+.copyright { margin-right: 10px; }
+
+/* Main 中央内容样式 (左右布局) */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin: 40px 0;
 }
 
-.learn-more {
-    padding: 10px 20px;
-    font-size: 1.1em;
-    background-color: #333;
-    color: white;
-    border: none;
+.content-left {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Canvas 占据左侧的大部分空间并居中 */
+#3d-avatar-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.content-right {
+    width: 400px; /* 固定右侧文本宽度 */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-left: 40px;
+}
+
+.about-title {
+    font-size: 72px; /* 巨大的 About Me 标题 */
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+.about-intro {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* 社交图标样式 */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.social-icons span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #000;
+    border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-weight: bold;
+    font-size: 18px;
+}
+.social-icons svg {
+    width: 20px;
+    height: 20px;
+    fill: #000;
 }
 
-.learn-more:hover {
-    background-color: #555;
+/* 滚动提示样式 */
+.scroll-down {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #555;
+    font-size: 12px;
+    cursor: pointer;
 }
+.scroll-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 24px;
+    border: 1px solid #555;
+    border-radius: 8px;
+}
+
+/* Footer 底部栏样式 */
+.footer-right { text-align: right; }
+.footer-item { color: #555; }
+.location-text { font-weight: bold; }
