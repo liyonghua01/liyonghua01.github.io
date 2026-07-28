@@ -18,11 +18,11 @@ document.addEventListener('mousemove', (e) => {
         const dx = mouseX - eyeCenterX;
         const dy = mouseY - eyeCenterY;
 
-        // 计算角度 (使用 Math.atan2 获取弧度)
+        // 计算角度 (使用 atan2 获取弧度)
         const angle = Math.atan2(dy, dx);
         
         // 计算瞳孔移动的最大距离，防止跑出眼眶范围
-        // 可以设置为眼眶宽度或高度的四分之一
+        // 设置为一个较大的范围，例如眼眶宽度的四分之一
         const maxDistance = Math.min(rect.width / 4, rect.height / 4); 
         
         // 计算实际的偏移距离，通过除以一个数值（例如 10）来降低敏感度，让移动更自然
@@ -33,7 +33,7 @@ document.addEventListener('mousemove', (e) => {
         const translateY = Math.sin(angle) * distance;
 
         // 应用 CSS transform 来更新瞳孔位置
-        // 保持初始的 translate(-50%, -50%) 居中，再加上新的计算偏移量
+        // calc确保初始保持居中(-50%)，然后加上新的偏移量
         pupil.style.transform = `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px))`;
     });
 });
