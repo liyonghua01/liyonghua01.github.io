@@ -3,37 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的互动全屏主页</title>
+    <title>李咏华 | TikTok电商专家 & AI视觉生成</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="homepage">
+    <div class="homepage">
+        
+        <!-- 人物 Hero Section (核心区域) -->
         <div class="face-wrapper">
-            <!-- 1. 最底层：面部和身体底图 -->
+            <!-- 底图：面部和身体（眼白部分导出的JPG图） -->
             <img src="face-base.jpg" alt="底图" class="face-base">
             
-            <!-- 2. 中间层：覆盖层（包括眼眶和眼镜） -->
+            <!-- 中间层：覆盖层（包括眼眶和眼镜） -->
             <div class="eye-mask-container">
                 <img src="face-mask.png" alt="遮罩" class="face-mask">
                 
-                <!-- 3. 核心：两个眼球 -->
+                <!-- 核心：两个眼球 -->
                 <div id="eyes-container">
                     <div id="eye-l" class="eye">
-                        <img src="eye-pupil.png" alt="左瞳孔" class="pupil">
+                        <img src="eye-pupil.png" alt="左眼瞳孔" class="pupil">
                     </div>
                     <div id="eye-r" class="eye">
-                        <img src="eye-pupil.png" alt="右瞳孔" class="pupil">
+                        <img src="eye-pupil.png" alt="右眼瞳孔" class="pupil">
                     </div>
                 </div>
             </div>
-            
-            <!-- 4. 文字介绍 (可选) -->
-            <div class="intro">
-                <h1>欢迎来到我的互动首页</h1>
-                <p>尝试移动鼠标，看看我的眼神。</p>
-            </div>
         </div>
+
+        <!-- 简历介绍 Section (全屏后，文本放在下方更整洁) -->
+        <div class="intro-section">
+            <h1>欢迎来到我的互动主页</h1>
+            <p>尝试移动鼠标，看看我的眼神。</p>
+            <p><strong>李咏华</strong> | 专注TikTok电商运营 & AI视觉生成 | 操盘 TikTok 0-1 冷启动策略与 ComfyUI 节点式工作流</p>
+            <button class="learn-more">了解更多我的项目案例</button>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
