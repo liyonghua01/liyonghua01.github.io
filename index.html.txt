@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>我的互动主页</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="homepage">
+        <div class="face-wrapper">
+            <!-- 1. 底层：你刚刚发的那张眼白底图 -->
+            <img src="face-base.jpg" alt="底图" class="face-base">
+            
+            <!-- 2. 中间层：两个眼球 -->
+            <div id="eyes-container">
+                <div id="eye-l" class="eye">
+                    <img src="eye-pupil.png" alt="左眼瞳孔" class="pupil">
+                </div>
+                <div id="eye-r" class="eye">
+                    <img src="eye-pupil.png" alt="右眼瞳孔" class="pupil">
+                </div>
+            </div>
+
+            <!-- 3. 顶层：眼镜和眼眶遮罩 -->
+            <img src="face-mask.png" alt="遮罩" class="face-mask">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

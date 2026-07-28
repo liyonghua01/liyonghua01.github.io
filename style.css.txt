@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #efece8; /* 原图的背景色 */
+    overflow: hidden;
+}
+
+.face-wrapper {
+    position: relative;
+    width: 600px; /* 控制人物大小 */
+    height: auto;
+}
+
+.face-base, .face-mask {
+    width: 100%;
+    display: block;
+}
+
+.face-base {
+    position: relative;
+    z-index: 1; /* 底层 */
+}
+
+.face-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3; /* 最顶层，盖住眼球溢出的部分 */
+    pointer-events: none; /* 让鼠标穿透遮罩，防止阻挡交互 */
+}
+
+#eyes-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* 夹在底图和遮罩中间 */
+}
+
+/* ★★★ 这里是需要你之后微调的地方 ★★★ */
+.eye {
+    position: absolute;
+    width: 14%;    /* 眼球的活动范围宽度 */
+    height: 10%;   /* 眼球的活动范围高度 */
+    top: 42%;      /* 眼睛在脸上垂直位置（百分比） */
+}
+
+#eye-l {
+    left: 32%;     /* 左眼在脸上的水平位置 */
+}
+
+#eye-r {
+    left: 54%;     /* 右眼在脸上的水平位置 */
+}
+
+.pupil {
+    position: absolute;
+    width: 50%;    /* 黑眼珠占眼球的比例 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.05s linear;
+}

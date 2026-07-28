@@ -1,0 +1,28 @@
+const pupils = document.querySelectorAll('.pupil');
+
+document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    pupils.forEach(pupil => {
+        const eye = pupil.parentElement;
+        const rect = eye.getBoundingClientRect();
+        
+        const eyeCenterX = rect.left + rect.width / 2;
+        const eyeCenterY = rect.top + rect.height / 2;
+
+        const dx = mouseX - eyeCenterX;
+        const dy = mouseY - eyeCenterY;
+
+        const angle = Math.atan2(dy, dx);
+        
+        // 限制瞳孔移动的最大距离，防止跑出眼白区域
+        const maxDistance = rect.width / 3; 
+        const distance = Math.min(Math.sqrt(dx * dx + dy * dy) / 5, maxDistance); 
+
+        const translateX = Math.cos(angle) * distance;
+        const translateY = Math.sin(angle) * distance;
+
+        pupil.style.transform = `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px))`;
+    });
+});
