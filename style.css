@@ -2,14 +2,14 @@
 * {
     margin: 0;
     padding: 0;
-    box-spacing: border-box;
+    box-sizing: border-box; /* 修正了之前的小拼写错误 */
 }
 
 body {
-    background-color: #f7e6cf; /* 复制目标图像的米色背景 */
+    background-color: #f7e6cf; 
     color: #000;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    overflow: hidden; /* 防止出现滚动条 */
+    overflow: hidden; 
     height: 100vh;
     width: 100vw;
 }
@@ -22,6 +22,8 @@ body {
     height: 100vh;
     width: 100vw;
     padding: 20px;
+    position: relative;
+    z-index: 10; /* 确保 UI 在最上层 */
 }
 
 /* Header 顶部栏样式 */
@@ -41,7 +43,7 @@ body {
 .device-switcher {
     display: flex;
     gap: 15px;
-    background-color: #d1b89c; /* 米色背景下的暗色块 */
+    background-color: #d1b89c; 
     padding: 5px 15px;
     border-radius: 20px;
 }
@@ -59,17 +61,23 @@ body {
     align-items: center;
     padding: 20px;
     margin: 40px 0;
+    position: relative; /* 为 Canvas 定位做准备 */
 }
 
+/* Canvas 占据整个背景并居中 */
 .content-left {
-    flex-grow: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* 让模型沉入文字下方 */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    pointer-events: none; /* 让鼠标穿透，防止挡住文字，但 JS 依然能读取鼠标位置 */
 }
 
-/* Canvas 占据左侧的大部分空间并居中 */
 #3d-avatar-canvas {
     width: 100%;
     height: 100%;
@@ -77,15 +85,17 @@ body {
 }
 
 .content-right {
-    width: 400px; /* 固定右侧文本宽度 */
+    width: 400px; 
     display: flex;
     flex-direction: column;
     gap: 30px;
     padding-left: 40px;
+    margin-left: auto; /* 把文字推到右边 */
+    pointer-events: auto; /* 恢复文字区域的鼠标点击交互 */
 }
 
 .about-title {
-    font-size: 72px; /* 巨大的 About Me 标题 */
+    font-size: 72px; 
     font-weight: 300;
     line-height: 1.1;
 }
