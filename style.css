@@ -1,155 +1,59 @@
-/* 全局样式和米色背景 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* 修正了之前的小拼写错误 */
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: #f7e6cf; color: #000; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; overflow: hidden; height: 100vh; width: 100vw; }
 
-body {
-    background-color: #f7e6cf; 
-    color: #000;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    overflow: hidden; 
-    height: 100vh;
-    width: 100vw;
-}
+.site-wrapper { position: relative; width: 100vw; height: 100vh; }
 
-/* 全屏布局容器 */
-.site-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    width: 100vw;
-    padding: 20px;
-    position: relative;
-    z-index: 10; /* 确保 UI 在最上层 */
-}
-
-/* Header 顶部栏样式 */
-.site-header, .site-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    letter-spacing: 0.1em;
-    padding: 10px 0;
-    text-transform: uppercase;
-}
-
+/* 顶部信息保持在左上角 */
+.site-header { position: absolute; top: 20px; left: 20px; z-index: 20; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
 .user-name { font-weight: bold; margin-right: 10px; }
 .user-title { color: #555; }
 
-.device-switcher {
-    display: flex;
-    gap: 15px;
-    background-color: #d1b89c; 
-    padding: 5px 15px;
-    border-radius: 20px;
-}
-.device-item { cursor: pointer; color: #555; }
-.device-item.active { color: #000; font-weight: bold; }
-
-.header-right { text-align: right; }
-.copyright { margin-right: 10px; }
-
-/* Main 中央内容样式 (左右布局) */
+/* 核心布局：使用 Flexbox 将屏幕一分为二 */
 .main-content {
-    flex-grow: 1;
     display: flex;
+    align-items: center; /* 让左右内容垂直居中 */
     justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    margin: 40px 0;
-    position: relative; /* 为 Canvas 定位做准备 */
+    width: 100vw;
+    height: 100vh;
 }
 
-/* Canvas 占据整个背景并居中 */
+/* 左侧 3D 模型区域，占据 70% */
 .content-left {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    width: 70%; 
     height: 100%;
-    z-index: -1; /* 让模型沉入文字下方 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none; /* 让鼠标穿透，防止挡住文字，但 JS 依然能读取鼠标位置 */
 }
 
 #3d-avatar-canvas {
     width: 100%;
     height: 100%;
     display: block;
+    outline: none;
 }
 
+/* 右侧文字区域 */
 .content-right {
-    width: 400px; 
+    width: 25%; /* 占据剩下的空间 */
+    margin-right: 5%; /* 距离右侧屏幕边缘留点空隙，更好看 */
     display: flex;
     flex-direction: column;
     gap: 30px;
-    padding-left: 40px;
-    margin-left: auto; /* 把文字推到右边 */
-    pointer-events: auto; /* 恢复文字区域的鼠标点击交互 */
+    z-index: 10;
+
+    /* 🚀 透明玻璃质感效果 (Glassmorphism) */
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.25); /* 半透明白底 */
+    backdrop-filter: blur(16px); /* 毛玻璃强模糊 */
+    -webkit-backdrop-filter: blur(16px); /* 兼容 Safari 浏览器 */
+    border: 1px solid rgba(255, 255, 255, 0.6); /* 像玻璃切面一样的发光边框 */
+    border-radius: 24px; /* 大圆角 */
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.08); /* 柔和的悬浮阴影 */
 }
 
-.about-title {
-    font-size: 72px; 
-    font-weight: 300;
-    line-height: 1.1;
-}
-
-.about-intro {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #333;
-}
-
-/* 社交图标样式 */
-.social-icons {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-.social-icons span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 36px;
-    height: 36px;
-    border: 1px solid #000;
-    border-radius: 50%;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 18px;
-}
-.social-icons svg {
-    width: 20px;
-    height: 20px;
-    fill: #000;
-}
-
-/* 滚动提示样式 */
-.scroll-down {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #555;
-    font-size: 12px;
-    cursor: pointer;
-}
-.scroll-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 16px;
-    height: 24px;
-    border: 1px solid #555;
-    border-radius: 8px;
-}
-
-/* Footer 底部栏样式 */
-.footer-right { text-align: right; }
-.footer-item { color: #555; }
-.location-text { font-weight: bold; }
+/* 文字与图标样式 */
+.about-title { font-size: 64px; font-weight: 300; line-height: 1.1; }
+.about-intro { font-size: 18px; line-height: 1.6; color: #333; }
+.social-icons { display: flex; gap: 15px; align-items: center; }
+.social-icons span { display: flex; justify-content: center; align-items: center; width: 36px; height: 36px; border: 1px solid #000; border-radius: 50%; cursor: pointer; font-size: 18px; font-weight: bold; }
+.social-icons svg { width: 20px; height: 20px; fill: #000; }
+.scroll-down { display: flex; align-items: center; gap: 10px; color: #555; font-size: 12px; cursor: pointer; }
+.scroll-icon { display: flex; justify-content: center; align-items: center; width: 16px; height: 24px; border: 1px solid #555; border-radius: 8px; }
